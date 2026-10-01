@@ -1,38 +1,85 @@
-# ResourceRelay
-Driver Manager · A Purely Local Root Module Toolbox
+Driver Manager
 
-What it is
+---
 
-A purely local Android Root module management tool that helps you flash, enable, disable, and delete modules. No network access, no data collection.
+What It Is
 
-What it does
+A front-end tool for flashing modules on rooted Android devices.
 
-· Flash modules: Supports .zip (Magisk / KernelSU / APatch modules) and .sh scripts. Automatically detects your current Root solution and calls the corresponding install command.
-· Manage modules: Lists system drivers, user drivers, and custom drivers. Supports enable, disable, and delete.
-· View environment: Displays kernel version, SELinux status, System partition read/write state, Bootloader lock state, and Zygisk detection.
-· Kernel parameters: Browse runtime parameters under /proc/sys. Supports viewing, editing, and hex read/write.
+It sits on top of Magisk / KernelSU / APatch. It does not provide root. It does not manage root. Root comes from the mask.
 
-What it does NOT do
+It only does one thing: push modules in, fast.
 
-· Does not provide Root access. Your device must already be rooted and authorized.
-· Does not implement module mounting. Module activation depends on Magisk / KernelSU / APatch itself.
-· Does not bypass any Root detection, and does not hide Root.
-· No network access, no data collection, no uploads.
+---
+
+What It Replaces
+
+It replaces the flashing UI of the mask.
+
+Instead of opening Magisk, going into modules, picking a file, confirming twice — you open this, pick a file, tap once, done.
+
+---
+
+What's Inside (roughly)
+
+· A flashing page — you pick a file, it runs the right command for your root type, shows live log.
+· A manager page — lists installed modules, delete with one tap.
+· A kernel config page — adjust kernel parameters.
+· A guard module — checks environment, backs up before flash, verifies after.
+· A root check module — detects whether you're on Magisk, KernelSU, or APatch.
+· A shell helper — runs commands with root, handles timeout and kill.
+
+That's basically it. A few pages, a few background helpers.
+
+---
+
+Supported Files
+
+.zip / .sh / .ko
+
+Auto-detects root type and calls the right backend.
+
+Root Type Command Used
+Magisk magisk --install-module
+KernelSU ksud module install
+APatch magisk --install-module (compat)
+
+---
+
+Safety Layer
+
+Not a guardrail. A safety rope.
+
+Before flash — environment check, auto backup, backup verify.
+During flash — 30s silence watchdog, live log, instant abort.
+After flash — module verify, SELinux context fix, report saved.
+
+---
+
+What It Does NOT Do
+
+· Does not manage root
+· Does not grant root
+· Does not check file format
+· Does not inspect script contents
+· Does not verify kernel compatibility
+· Does not verify file signature
+
+Root comes from the mask. This only takes the wheel at the flashing step.
+
+---
 
 Compatibility
 
-· Root solutions: Magisk / KernelSU / APatch.
-· Devices with readable kernel version: detected automatically.
-· Some Huawei / Honor devices: kernel version cannot be read directly due to system restrictions; it is estimated based on device model code and is for reference only.
-· HarmonyOS 5.0 and above: system restrictions may limit some features.
+Root Provider Supported
+Magisk Yes
+KernelSU Yes
+APatch Yes
 
-Risk Notice
+Auto-detected. No config needed.
 
-Flashing modules, modifying kernel parameters, and deleting system drivers all carry risks and may cause the device to fail to boot. Please make sure you understand your device and have backups before proceeding. You are solely responsible for any consequences of using this tool.
+---
 
-Features
+One Line
 
-· Pure native implementation, no third-party libraries, small size, fast startup.
-· No network permission, purely local.
-· Transparent code, free to decompile and inspect.
-· Version 0.19, under continuous development.
+The mask provides root. This provides the fastest way to push a module in.
