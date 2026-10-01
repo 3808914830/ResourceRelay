@@ -1,49 +1,38 @@
 # ResourceRelay
+Driver Manager · A Purely Local Root Module Toolbox
 
-Treasure hub for geeks. Take what you need.
+What it is
 
-## 📦 Resources
+A purely local Android Root module management tool that helps you flash, enable, disable, and delete modules. No network access, no data collection.
 
-- **DriverManager_1.0.apk**
-  - 197KB, pure Java, no SO, all reflection, 9 dex files.
-  - Features: environment check / bypass all root managers / safe flash / kernel tuning / custom disguise.
+What it does
 
-- **projects.zip**
-  - Complete project source code. Unzip and use.
-  - Pure Java, no third-party libraries, no native SO, no obfuscation.
+· Flash modules: Supports .zip (Magisk / KernelSU / APatch modules) and .sh scripts. Automatically detects your current Root solution and calls the corresponding install command.
+· Manage modules: Lists system drivers, user drivers, and custom drivers. Supports enable, disable, and delete.
+· View environment: Displays kernel version, SELinux status, System partition read/write state, Bootloader lock state, and Zygisk detection.
+· Kernel parameters: Browse runtime parameters under /proc/sys. Supports viewing, editing, and hex read/write.
 
-## 🛡️ Security
+What it does NOT do
 
-- V1 + V2 + V3 signed.
-- No native dependencies.
-- Code is transparent. Decompile and check for yourself.
+· Does not provide Root access. Your device must already be rooted and authorized.
+· Does not implement module mounting. Module activation depends on Magisk / KernelSU / APatch itself.
+· Does not bypass any Root detection, and does not hide Root.
+· No network access, no data collection, no uploads.
 
-## 🔗 More
+Compatibility
 
-- More resources will be added over time.
+· Root solutions: Magisk / KernelSU / APatch.
+· Devices with readable kernel version: detected automatically.
+· Some Huawei / Honor devices: kernel version cannot be read directly due to system restrictions; it is estimated based on device model code and is for reference only.
+· HarmonyOS 5.0 and above: system restrictions may limit some features.
 
----
+Risk Notice
 
-# 资源中转站
+Flashing modules, modifying kernel parameters, and deleting system drivers all carry risks and may cause the device to fail to boot. Please make sure you understand your device and have backups before proceeding. You are solely responsible for any consequences of using this tool.
 
-宝藏人自取。
+Features
 
-## 📦 资源列表
-
-- **DriverManager_1.0.apk**
-  197KB，纯 Java，无 SO，全反射，9 个 dex。
-  支持环境检测 / 无视面具通杀模块 / 安全刷入 / 内核调参 / 自定义伪装。
-
-- **projects.zip**
-  完整工程源码，解压即用。
-  纯 Java 手写，无第三方库，无 Native SO，无加固。
-
-## 🛡️ 安全声明
-
-- V1 + V2 + V3 全签名
-- 无 Native 依赖
-- 代码透明，欢迎反编译检查
-
-## 🔗 更多
-
-- 后续资源持续更新
+· Pure native implementation, no third-party libraries, small size, fast startup.
+· No network permission, purely local.
+· Transparent code, free to decompile and inspect.
+· Version 0.19, under continuous development.
